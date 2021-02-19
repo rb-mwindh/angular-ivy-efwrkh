@@ -4,9 +4,11 @@ import * as PouchDB from "pouchdb";
 
 @Injectable()
 export class PouchdbService {
-  database;
+  private database = new PouchDB("system-message");
 
-  constructor() {
-    this.database = new PouchDB("system-message");
+  constructor() {}
+
+  public fetch() {
+    return this.database.allDocs({ includeDocs: true });
   }
 }
