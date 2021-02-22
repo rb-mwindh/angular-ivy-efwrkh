@@ -1,14 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable, InjectionToken } from "@angular/core";
 
-import * as PouchDB from "pouchdb";
+import PouchDB from "pouchdb";
 
-@Injectable()
-export class PouchdbService {
-  private database = new PouchDB("system-message");
-
-  constructor() {}
-
-  public fetch() {
-    return this.database.allDocs({ includeDocs: true });
-  }
-}
+const Database = new InjectionToken<PouchDB>("Database", {
+  providedIn: "root",
+  factory: () => new PouchDB("system-message")
+});
